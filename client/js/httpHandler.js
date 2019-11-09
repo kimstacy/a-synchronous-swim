@@ -5,19 +5,50 @@
   //
   // TODO: build the swim command fetcher here
   //
+  const getSwimCommand = function () {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      cache: false,
+      contentType: false,
+      processData: true,
+      success: (direction) => {
+        SwimTeam.move(direction);
+        // reload the page
+        // window.location = window.location.href;
+      }
+    });
+  };
+
+  let randomCommand = function() {
+    var array = ['left', 'right', 'up', 'down'];
+    var index = Math.floor(Math.random() * 3);
+    var commandStr = array[index];
+   console.log(commandStr);
+    return commandStr;
+  }
+
+  let swimTeamMove = function() {
+    var direction = randomCommand();
+    SwimTeam.move(direction);
+  }
+
+  getSwimCommand();
+  setInterval(swimTeamMove, 3000);
+
 
   /////////////////////////////////////////////////////////////////////
-  // The ajax file uplaoder is provided for your convenience!
+  // The ajax file uploader is provided for your convenience!
   // Note: remember to fix the URL below.
   /////////////////////////////////////////////////////////////////////
 
-  const ajaxFileUplaod = (file) => {
+  const ajaxFileUpload = (file) => {
     var formData = new FormData();
     formData.append('file', file);
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
@@ -43,7 +74,7 @@
       return;
     }
 
-    ajaxFileUplaod(file);
+    ajaxFileUpload(file);
   });
 
 })();

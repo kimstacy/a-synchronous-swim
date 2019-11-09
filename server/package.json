@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nodemon .",
     "server": "node .",
+    "server-debug": "node --inspect index.js",
     "test": "node_modules/jest/bin/jest.js spec"
   },
   "author": "",
