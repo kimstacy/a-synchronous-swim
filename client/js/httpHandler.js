@@ -14,7 +14,7 @@
     });
   };
 
-  setInterval(swimCommandFetcher, 3000);
+  // setInterval(swimCommandFetcher, 3000);
 
   const ajaxFileUpload = (file) => {
     var formData = new FormData();

@@ -20,12 +20,16 @@ module.exports.router = (req, res, next = ()=>{}) => {
   const swimCommand = ['left', 'right', 'up', 'down'];
   let index = Math.floor(Math.random() * 4);
 
-  if (req.method === 'GET') {
+  if (req.method === 'GET' && req.url === "/") {
     //res.write(swimCommand[index]);
-    var tryThis = messagequeue.dequeue();
-    console.log(`tryThis = ${tryThis}`);
-    var newCommand = 'down';
+    var newCommand = messagequeue.dequeue();
+    if (newCommand === undefined) {
+      newCommand = 'up';
+    }
+    console.log(`newCommand = ${newCommand}`);
     res.write(newCommand);
+  } else {
+    // return 404
   }
   res.end();
   next(); // invoke next() at the end of a request to help with testing!
